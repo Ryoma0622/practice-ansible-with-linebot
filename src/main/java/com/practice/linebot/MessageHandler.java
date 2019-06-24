@@ -104,15 +104,9 @@ public class MessageHandler {
                             TextMessage.builder().text("あなたは「男性」ですね？").quickReply(QuickReply.builder().items(
                                     Arrays.asList(
                                             QuickReplyItem.builder().action(new PostbackAction("はい", "yes_men"))
-                                                          .imageUrl(
-                                                                  URI.create(
-                                                                          "https://" + DOMAIN + ".ngrok.io/images/test1.jpg"))
                                                           .build(),
                                             QuickReplyItem.builder()
                                                           .action(new PostbackAction("いいえ", "no_women"))
-                                                          .imageUrl(
-                                                                  URI.create(
-                                                                          "https://" + DOMAIN + ".ngrok.io/images/test2.jpg"))
                                                           .build()
                                     )
                             ).build()).build()
@@ -145,13 +139,9 @@ public class MessageHandler {
                             TextMessage.builder().text("あなたは「女性」ですね？").quickReply(QuickReply.builder().items(
                                     Arrays.asList(
                                             QuickReplyItem.builder().action(
-                                                    new PostbackAction("はい", "yes_women")).imageUrl(
-                                                    URI.create("https://" + DOMAIN + ".ngrok.io/images/test1.jpg"))
+                                                    new PostbackAction("はい", "yes_women"))
                                                           .build(),
                                             QuickReplyItem.builder().action(new PostbackAction("いいえ", "no_men"))
-                                                          .imageUrl(
-                                                                  URI.create(
-                                                                          "https://" + DOMAIN + ".ngrok.io/images/test2.jpg"))
                                                           .build()
                                     )
                             ).build()).build()
