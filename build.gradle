@@ -29,3 +29,5 @@ dependencies {
 	implementation 'com.linecorp.bot:line-bot-spring-boot:2.6.1'
 	compileOnly 'org.projectlombok:lombok:1.18.8'
 }
+
+defaultTasks "clean", "build"
