@@ -36,7 +36,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MessageHandler {
     private final LineMessagingClient client;
-    private static final String DOMAIN = "e86413d8";
+    private static final String DOMAIN = "ancient-reaches-25993.herokuapp.com";
 
     @EventMapping
     public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
@@ -104,9 +104,15 @@ public class MessageHandler {
                             TextMessage.builder().text("あなたは「男性」ですね？").quickReply(QuickReply.builder().items(
                                     Arrays.asList(
                                             QuickReplyItem.builder().action(new PostbackAction("はい", "yes_men"))
+                                                          .imageUrl(
+                                                                  URI.create(
+                                                                          "https://" + DOMAIN + "/images/test1.jpg"))
                                                           .build(),
                                             QuickReplyItem.builder()
                                                           .action(new PostbackAction("いいえ", "no_women"))
+                                                          .imageUrl(
+                                                                  URI.create(
+                                                                          "https://" + DOMAIN + "/images/test2.jpg"))
                                                           .build()
                                     )
                             ).build()).build()
@@ -139,9 +145,13 @@ public class MessageHandler {
                             TextMessage.builder().text("あなたは「女性」ですね？").quickReply(QuickReply.builder().items(
                                     Arrays.asList(
                                             QuickReplyItem.builder().action(
-                                                    new PostbackAction("はい", "yes_women"))
+                                                    new PostbackAction("はい", "yes_women")).imageUrl(
+                                                    URI.create("https://" + DOMAIN + "/images/test1.jpg"))
                                                           .build(),
                                             QuickReplyItem.builder().action(new PostbackAction("いいえ", "no_men"))
+                                                          .imageUrl(
+                                                                  URI.create(
+                                                                          "https://" + DOMAIN + "/images/test2.jpg"))
                                                           .build()
                                     )
                             ).build()).build()
