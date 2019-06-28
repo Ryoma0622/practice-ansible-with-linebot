@@ -1,5 +1,34 @@
 version: "3.7"
 services:
+  web:
+    container_name: linebot-web
+    image: nginx
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    restart: always
+
+  app:
+    container_name: linebot-app
+    image: openjdk
+    volumes:
+      - .:/app
+    working_dir: /app
+    expose:
+      - "8080"
+    restart: always
+    command: ./gradlew bootRun
+    depends_on:
+      - web
+      - db
+#    command: >
+#      bash -c
+#      "git clone https://github.com/Ryoma0622/line-bot.git
+#       && cd line-bot
+#       && ./gradlew --full-stacktrace -q build
+#       && ./gradlew bootRun"
+
   db:
     container_name: linebot-postgres
     image: postgres
