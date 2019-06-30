@@ -2,48 +2,31 @@ version: "3.7"
 services:
   web:
     container_name: linebot-web
-    image: nginx
+    image: nginx:latest
     volumes:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     ports:
       - "127.0.0.1:80:80"
     restart: always
 
-#  web2:
-#    container_name: linebot-web2
-#    image: nginx
-#    volumes:
-#      - ./docker/nginx/conf.d:/etc/nginx/conf.d
-#    ports:
-#      - "127.0.0.1:90:80"
-#    restart: always
-
   app:
     container_name: linebot-app
-    image: openjdk
-    volumes:
-      - ./build/libs:/jar
-    working_dir: /jar
+    image: springboot:latest
+    build: ./docker/app
     expose:
       - "8080"
     restart: always
-    command: java -jar -Dspring.profiles.active=docker linebot-0.0.1-SNAPSHOT.jar
+    command: java -jar -Dspring.profiles.active=docker build/libs/linebot-0.0.1-SNAPSHOT.jar
     depends_on:
       - web
       - db
     environment:
       LINE_BOT_CHANNEL_SECRET: ${LINE_BOT_CHANNEL_SECRET}
       LINE_BOT_CHANNEL_TOKEN: ${LINE_BOT_CHANNEL_TOKEN}
-#    command: >
-#      bash -c
-#      "git clone https://github.com/Ryoma0622/line-bot.git
-#       && cd line-bot
-#       && ./gradlew --full-stacktrace -q build
-#       && ./gradlew bootRun"
 
   db:
     container_name: linebot-postgres
-    image: postgres
+    image: postgres:latest
     ports:
       - "127.0.0.1:5432:5432"
     volumes:
@@ -58,7 +41,7 @@ services:
 
   pgadmin4:
     container_name: linebot-pgadmin4
-    image: dpage/pgadmin4:4.9
+    image: dpage/pgadmin4:latest
     ports:
       - 8000:80
     volumes:
