@@ -6,22 +6,34 @@ services:
     volumes:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     ports:
-      - "80:80"
+      - "127.0.0.1:80:80"
     restart: always
+
+#  web2:
+#    container_name: linebot-web2
+#    image: nginx
+#    volumes:
+#      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+#    ports:
+#      - "127.0.0.1:90:80"
+#    restart: always
 
   app:
     container_name: linebot-app
     image: openjdk
     volumes:
-      - .:/app
-    working_dir: /app
+      - ./build/libs:/jar
+    working_dir: /jar
     expose:
       - "8080"
     restart: always
-    command: ./gradlew bootRun
+    command: java -jar -Dspring.profiles.active=docker linebot-0.0.1-SNAPSHOT.jar
     depends_on:
       - web
       - db
+    environment:
+      LINE_BOT_CHANNEL_SECRET: ${LINE_BOT_CHANNEL_SECRET}
+      LINE_BOT_CHANNEL_TOKEN: ${LINE_BOT_CHANNEL_TOKEN}
 #    command: >
 #      bash -c
 #      "git clone https://github.com/Ryoma0622/line-bot.git
@@ -33,7 +45,7 @@ services:
     container_name: linebot-postgres
     image: postgres
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     volumes:
       - ./docker/postgres/init:/docker-entrypoint-initdb.d
     environment:
