@@ -16,7 +16,7 @@ services:
     expose:
       - "8080"
     restart: always
-#    command: java -jar -Dspring.profiles.active=docker build/libs/linebot-0.0.1-SNAPSHOT.jar
+    #    command: java -jar -Dspring.profiles.active=docker build/libs/linebot-0.0.1-SNAPSHOT.jar
     command: ./gradlew bootRun
     depends_on:
       - web
@@ -31,8 +31,8 @@ services:
     image: postgres:latest
     ports:
       - "127.0.0.1:5432:5432"
-#    volumes:
-#      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+    #    volumes:
+    #      - ./docker/postgres/init:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_DB: linebot
       POSTGRES_USER: root
