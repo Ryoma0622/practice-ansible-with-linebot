@@ -2,12 +2,15 @@ version: "3.7"
 services:
   web:
     container_name: linebot-web
-    image: nginx:latest
-    volumes:
-      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    build:
+      context: ./docker/centos/web
+    image: centos-web
     ports:
       - "127.0.0.1:80:80"
     restart: always
+    privileged: true
+    depends_on:
+      - app
 
   app:
     container_name: linebot-app
@@ -17,7 +20,6 @@ services:
     restart: always
     command: ./gradlew b    ootRun
     depends_on:
-      - web
       - db
     environment:
       SPRING_PROFILES_ACTIVE: docker
