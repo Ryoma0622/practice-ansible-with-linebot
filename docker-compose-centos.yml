@@ -18,7 +18,7 @@ services:
     expose:
       - "8080"
     restart: always
-    command: ./gradlew b    ootRun
+    command: ./gradlew bootRun
     depends_on:
       - db
     environment:
