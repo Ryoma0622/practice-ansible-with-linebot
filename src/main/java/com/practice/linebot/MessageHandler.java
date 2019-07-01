@@ -41,6 +41,7 @@ public class MessageHandler {
     @EventMapping
     public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
         return TextMessage.builder().text(event.getMessage().getText()).build();
+
     }
 
     @EventMapping
