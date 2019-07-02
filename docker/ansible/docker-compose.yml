@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  ansible:
+    container_name: ansible
+    volumes:
+      - ./playbook:/root/playbook
+    build: .
+    image: ansible
+    working_dir: /root/playbook
+
+  web:
+    container_name: web
+    build:
+      context: ./web
+    image: web
+    privileged: true
+    expose:
+      - 22
