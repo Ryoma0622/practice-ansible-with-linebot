@@ -1,0 +1,14 @@
+---
+- name: install via yum
+  yum: name={{ item }} state=installed
+  with_items:
+    - vim
+#    - git
+- name: Example of Template
+  template:
+    src: test.txt.j2
+    dest: /root/test.txt
+#    src={{ playbook_dir }}/tmp
+#    owner: root
+#    group: root
+#    mode: 0700
