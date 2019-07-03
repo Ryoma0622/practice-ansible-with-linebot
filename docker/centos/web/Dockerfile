@@ -6,4 +6,5 @@ RUN set -x && \
   yum install -y nginx
 COPY ./conf.d /etc/nginx/conf.d
 EXPOSE 80
-CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+#CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+CMD ["/sbin/init"]

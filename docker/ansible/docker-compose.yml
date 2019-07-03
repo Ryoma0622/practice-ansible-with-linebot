@@ -8,11 +8,47 @@ services:
     image: ansible
     working_dir: /root/playbook
 
-  web:
-    container_name: web
+  web1:
+    container_name: linebot-web1
     build:
-      context: ./web
-    image: web
+      context: server
+    image: server
     privileged: true
     expose:
       - 22
+
+  web2:
+    container_name: linebot-web2
+    build:
+      context: server
+    image: server
+    privileged: true
+    expose:
+      - 22
+
+  web3:
+    container_name: linebot-web3
+    build:
+      context: server
+    image: server
+    privileged: true
+    expose:
+      - 22
+
+#  app:
+#    container_name: linebot-app
+#    build:
+#      context: server
+#    image: server
+#    privileged: true
+#    expose:
+#      - 22
+#
+#  db:
+#    container_name: linebot-db
+#    build:
+#      context: server
+#    image: server
+#    privileged: true
+#    expose:
+#      - 22
